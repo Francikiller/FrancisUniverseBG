@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
-    const numCircles = 1000;  // Increased number of circles to 4,000
+    const numCircles = 500;  // Increased number of circles to 4,000
 
     for (let i = 0; i < numCircles; i++) {
         const circle = document.createElement('div');
         circle.classList.add('circle');
         
         // Set initial size and position
-        const size = Math.random() * 5 + 2 + 'px'; // Smaller circles
+        const size = Math.random() * 3 + 1 + 'px'; // Smaller circles
         const startX = Math.random() * 100 + 'vw';
         const startY = Math.random() * 100 + 'vh';
         const endX = Math.random() * 100 + 'vw';
