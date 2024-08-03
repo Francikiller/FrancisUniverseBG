@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
-    const numCircles = 50;
+    const numCircles = 100;  // Increased number of circles
 
     for (let i = 0; i < numCircles; i++) {
         const circle = document.createElement('div');
@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const size = Math.random() * 10 + 5 + 'px';
         const left = Math.random() * 100 + 'vw';
         const top = Math.random() * 100 + 'vh';
-        const blinkDuration = Math.random() * 2 + 0.5 + 's'; // Blinking duration
-        const blinkDelay = Math.random() * 2 + 's'; // Blinking delay
+        const blinkDuration = Math.random() * 1.5 + 2 + 's'; // Blinking duration between 2s and 3.5s
+        const movementDuration = Math.random() * 10 + 5 + 's'; // Movement duration between 5s and 15s
 
         circle.style.width = size;
         circle.style.height = size;
@@ -18,13 +18,12 @@ document.addEventListener("DOMContentLoaded", function() {
         circle.style.top = top;
         circle.style.animationDuration = `blink ${blinkDuration} infinite`;
 
-        // Set a random movement interval
-        const movementDuration = Math.random() * 10 + 5 + 's';
+        // Function to set a random movement animation
         const randomMovement = () => {
             const newLeft = Math.random() * 100 + 'vw';
             const newTop = Math.random() * 100 + 'vh';
 
-            // Create a CSS animation for the movement
+            // Create CSS keyframes for the movement
             const keyframes = `
                 @keyframes move-${i} {
                     0% {
@@ -40,10 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
             styleSheet.innerText = keyframes;
             document.head.appendChild(styleSheet);
 
+            // Apply movement animation
             circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
         };
 
-        // Initial movement and set intervals for random movement changes
+        // Initialize movement and set intervals for random movement changes
         randomMovement();
         setInterval(randomMovement, (Math.random() * 10 + 5) * 1000);
 
