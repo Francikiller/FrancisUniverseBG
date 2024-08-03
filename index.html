@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Animation</title>
+    <title>Animated Background</title>
     <style>
         body, html {
             margin: 0;
@@ -12,7 +12,7 @@
             height: 100%;
             background: #000;
         }
-
+        
         .circle-container {
             position: absolute;
             width: 100%;
@@ -20,15 +20,16 @@
             top: 0;
             left: 0;
             overflow: hidden;
+            pointer-events: none; /* Ensure it does not interfere with page interaction */
         }
-
+        
         .circle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.8);
             animation: blink 6s infinite;
         }
-
+        
         @keyframes blink {
             0% {
                 opacity: 1;
@@ -47,13 +48,12 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.querySelector('.circle-container');
-            const numCircles = 4000;  // Increased number of circles to 4,000
-
+            const numCircles = 4000; // Increased number of circles to 4,000
+        
             for (let i = 0; i < numCircles; i++) {
                 const circle = document.createElement('div');
                 circle.classList.add('circle');
                 
-                // Set initial size and position
                 const size = Math.random() * 5 + 2 + 'px'; // Smaller circles
                 const startX = Math.random() * 100 + 'vw';
                 const startY = Math.random() * 100 + 'vh';
@@ -67,7 +67,6 @@
                 circle.style.transform = `translate(${startX}, ${startY})`;
                 circle.style.animationDuration = `blink ${blinkDuration} infinite`;
 
-                // Function to create and apply a random movement animation
                 const applyMovement = () => {
                     const keyframes = `
                         @keyframes move-${i} {
@@ -84,14 +83,11 @@
                     styleSheet.innerText = keyframes;
                     document.head.appendChild(styleSheet);
 
-                    // Apply movement animation
                     circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
                 };
 
-                // Initialize movement and set intervals for random movement changes
                 applyMovement();
                 setInterval(() => {
-                    // Update positions for the next animation
                     const newEndX = Math.random() * 100 + 'vw';
                     const newEndY = Math.random() * 100 + 'vh';
                     const newKeyframes = `
@@ -112,7 +108,6 @@
                     endX = newEndX;
                     endY = newEndY;
 
-                    // Apply the updated animation
                     circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
                 }, (Math.random() * 10 + 5) * 1000);
 
