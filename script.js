@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
-    const numCircles = 400;  // Increased number of circles
+    const numCircles = 4000;  // Increased number of circles to 4,000
 
     for (let i = 0; i < numCircles; i++) {
         const circle = document.createElement('div');
