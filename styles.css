@@ -19,7 +19,7 @@ body, html {
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.8);
-    animation: blink 5s infinite;
+    animation: blink 6s infinite; /* Slower blink speed */
 }
 
 @keyframes blink {
