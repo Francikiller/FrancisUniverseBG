@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const size = Math.random() * 10 + 5 + 'px';
         const left = Math.random() * 100 + 'vw';
         const top = Math.random() * 100 + 'vh';
-        const duration = Math.random() * 5 + 5 + 's';
         const blinkDuration = Math.random() * 2 + 0.5 + 's'; // Blinking duration
         const blinkDelay = Math.random() * 2 + 's'; // Blinking delay
 
@@ -17,31 +16,36 @@ document.addEventListener("DOMContentLoaded", function() {
         circle.style.height = size;
         circle.style.left = left;
         circle.style.top = top;
-        circle.style.animationDuration = `${blinkDuration}`;
-        circle.style.animationDelay = `0s, ${blinkDelay}`; // Apply delay only to blinking
-        
-        // Generate random end position for the circle
-        const endX = Math.random() * 100 + 'vw';
-        const endY = Math.random() * 100 + 'vh';
-        const keyframes = `
-            @keyframes move-${i} {
-                0% {
-                    transform: translate(${left}, ${top});
-                }
-                100% {
-                    transform: translate(${endX}, ${endY});
-                }
-            }
-        `;
-        
-        // Append the keyframes to the document
-        const styleSheet = document.createElement('style');
-        styleSheet.type = 'text/css';
-        styleSheet.innerText = keyframes;
-        document.head.appendChild(styleSheet);
+        circle.style.animationDuration = `blink ${blinkDuration} infinite`;
 
-        // Apply the animation to the circle
-        circle.style.animation = `move-${i} ${duration} linear infinite, blink ${blinkDuration} infinite`;
+        // Set a random movement interval
+        const movementDuration = Math.random() * 10 + 5 + 's';
+        const randomMovement = () => {
+            const newLeft = Math.random() * 100 + 'vw';
+            const newTop = Math.random() * 100 + 'vh';
+
+            // Create a CSS animation for the movement
+            const keyframes = `
+                @keyframes move-${i} {
+                    0% {
+                        transform: translate(${circle.style.left}, ${circle.style.top});
+                    }
+                    100% {
+                        transform: translate(${newLeft}, ${newTop});
+                    }
+                }
+            `;
+            const styleSheet = document.createElement('style');
+            styleSheet.type = 'text/css';
+            styleSheet.innerText = keyframes;
+            document.head.appendChild(styleSheet);
+
+            circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
+        };
+
+        // Initial movement and set intervals for random movement changes
+        randomMovement();
+        setInterval(randomMovement, (Math.random() * 10 + 5) * 1000);
 
         container.appendChild(circle);
     }
