@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const circle = document.createElement('div');
         circle.classList.add('circle');
         
-        const size = Math.random() * 10 + 5 + 'px';
+        const size = Math.random() * 10 + 2 + 'px';
         const left = Math.random() * 100 + 'vw';
         const top = Math.random() * 100 + 'vh';
-        const blinkDuration = Math.random() * 1.5 + 2 + 's'; // Blinking duration between 2s and 3.5s
-        const movementDuration = Math.random() * 10 + 5 + 's'; // Movement duration between 5s and 15s
+        const blinkDuration = Math.random() * 2 + 5 + 's'; // Blinking duration between 2s and 3.5s
+        const movementDuration = Math.random() * 8 + 3 + 's'; // Movement duration between 5s and 15s
 
         circle.style.width = size;
         circle.style.height = size;
