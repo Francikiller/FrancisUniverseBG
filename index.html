@@ -26,7 +26,7 @@
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(57, 0, 96, 0.8);
             animation: blink 6s infinite;
         }
         
@@ -48,13 +48,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.querySelector('.circle-container');
-            const numCircles = 4000; // Increased number of circles to 4,000
+            const numCircles = 450; // Increased number of circles to 4,000
         
             for (let i = 0; i < numCircles; i++) {
                 const circle = document.createElement('div');
                 circle.classList.add('circle');
                 
-                const size = Math.random() * 5 + 2 + 'px'; // Smaller circles
+                const size = Math.random() * 3 + 1 + 'px'; // Smaller circles
                 const startX = Math.random() * 100 + 'vw';
                 const startY = Math.random() * 100 + 'vh';
                 const endX = Math.random() * 100 + 'vw';
