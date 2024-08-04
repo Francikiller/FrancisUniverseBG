@@ -101,4 +101,19 @@ document.addEventListener("DOMContentLoaded", function() {
         viewportWidth = window.innerWidth;
         viewportHeight = window.innerHeight;
     });
+
+    // Typewriter effect for the text
+    const textBox = document.querySelector('.text-box');
+    const text = "Welcome to Francis Universe.";
+    let index = 0;
+
+    const typeWriter = () => {
+        if (index < text.length) {
+            textBox.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100); // Adjust typing speed here
+        }
+    };
+
+    typeWriter();
 });
