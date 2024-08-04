@@ -1,29 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
-    const numCircles = 450;  // Increased number of circles to 4,000
+    const numCircles = 450;
+    const styleSheet = document.createElement('style');
+    document.head.appendChild(styleSheet);
 
     for (let i = 0; i < numCircles; i++) {
         const circle = document.createElement('div');
         circle.classList.add('circle');
         
-        // Set initial size and position
-        const size = Math.random() * 3 + 1 + 'px'; // Smaller circles
+        const size = Math.random() * 3 + 1 + 'px';
         const startX = Math.random() * 100 + 'vw';
         const startY = Math.random() * 100 + 'vh';
-        const endX = Math.random() * 100 + 'vw';
-        const endY = Math.random() * 100 + 'vh';
-        const blinkDuration = Math.random() * 2 + 4 + 's'; // Slower blinking duration between 4s and 6s
-        const movementDuration = Math.random() * 10 + 5 + 's'; // Movement duration between 5s and 15s
+        let endX = Math.random() * 100 + 'vw';
+        let endY = Math.random() * 100 + 'vh';
+        const blinkDuration = Math.random() * 2 + 4 + 's';
+        const movementDuration = Math.random() * 10 + 5 + 's';
 
         circle.style.width = size;
         circle.style.height = size;
         circle.style.transform = `translate(${startX}, ${startY})`;
         circle.style.animationDuration = `blink ${blinkDuration} infinite`;
 
-        // Function to create and apply a random movement animation
-        const applyMovement = () => {
+        const updateKeyframes = (index, startX, startY, endX, endY) => {
             const keyframes = `
-                @keyframes move-${i} {
+                @keyframes move-${index} {
                     0% {
                         transform: translate(${startX}, ${startY});
                     }
@@ -32,40 +32,25 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
             `;
-            const styleSheet = document.createElement('style');
-            styleSheet.type = 'text/css';
-            styleSheet.innerText = keyframes;
-            document.head.appendChild(styleSheet);
-
-            // Apply movement animation
-            circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
+            const existingKeyframes = styleSheet.innerHTML.match(new RegExp(`@keyframes move-${index} {[^}]+}`, 'g'));
+            if (existingKeyframes) {
+                styleSheet.innerHTML = styleSheet.innerHTML.replace(existingKeyframes[0], keyframes);
+            } else {
+                styleSheet.innerHTML += keyframes;
+            }
         };
 
-        // Initialize movement and set intervals for random movement changes
-        applyMovement();
+        updateKeyframes(i, startX, startY, endX, endY);
+        circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
+
         setInterval(() => {
-            // Update positions for the next animation
             const newEndX = Math.random() * 100 + 'vw';
             const newEndY = Math.random() * 100 + 'vh';
-            const newKeyframes = `
-                @keyframes move-${i} {
-                    0% {
-                        transform: translate(${endX}, ${endY});
-                    }
-                    100% {
-                        transform: translate(${newEndX}, ${newEndY});
-                    }
-                }
-            `;
-            const styleSheet = document.createElement('style');
-            styleSheet.type = 'text/css';
-            styleSheet.innerText = newKeyframes;
-            document.head.appendChild(styleSheet);
+            updateKeyframes(i, endX, endY, newEndX, newEndY);
 
             endX = newEndX;
             endY = newEndY;
 
-            // Apply the updated animation
             circle.style.animation = `move-${i} ${movementDuration} linear infinite, blink ${blinkDuration} infinite`;
         }, (Math.random() * 10 + 5) * 1000);
 
