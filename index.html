@@ -60,12 +60,29 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             font-family: 'Silkscreen', cursive; /* Use the Google Font */
         }
+
+        .text-box .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #7e00af;
+            animation: blinkCursor 1s infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="circle-container"></div>
     <div class="text-box">
-        Welcome
+        Welcome<span class="cursor"></span>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
