@@ -103,17 +103,42 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Typewriter effect for the text
-    const textBox = document.querySelector('.text-box');
-    const text = "Welcome to Francis Universe.";
-    let index = 0;
+    const textBox = document.querySelector('.typewriter');
+    const texts = ["Welcome", "To Francis Universe."];
+    let currentTextIndex = 0;
+    let isDeleting = false;
+    let textIndex = 0;
 
-    const typeWriter = () => {
-        if (index < text.length) {
-            textBox.innerHTML += text.charAt(index);
-            index++;
-            setTimeout(typeWriter, 100); // Adjust typing speed here
+    const typewriter = () => {
+        const currentText = texts[currentTextIndex];
+        const typeSpeed = 100; // Speed of typing
+        const deleteSpeed = 50; // Speed of deleting
+
+        if (!isDeleting) {
+            // Typing
+            if (textIndex < currentText.length) {
+                textBox.innerHTML += currentText.charAt(textIndex);
+                textIndex++;
+                setTimeout(typewriter, typeSpeed);
+            } else {
+                // Start deleting after typing is complete
+                isDeleting = true;
+                setTimeout(typewriter, 1000); // Pause before deleting
+            }
+        } else {
+            // Deleting
+            if (textIndex > 0) {
+                textBox.innerHTML = currentText.substring(0, textIndex - 1);
+                textIndex--;
+                setTimeout(typewriter, deleteSpeed);
+            } else {
+                // Move to the next text
+                isDeleting = false;
+                currentTextIndex = (currentTextIndex + 1) % texts.length;
+                setTimeout(typewriter, 500); // Pause before typing next text
+            }
         }
     };
 
-    typeWriter();
+    typewriter();
 });

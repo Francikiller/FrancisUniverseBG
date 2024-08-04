@@ -15,17 +15,20 @@
     overflow: hidden; /* Hide the overflow */
 }
 
-.text-box .typewriter {
-    display: inline; /* Ensure text is inline */
-    border-right: 2px solid #7e00af; /* Cursor effect */
-    animation: blink-cursor 0.8s steps(2) infinite; /* Cursor blink animation */
+.cursor {
+    display: inline-block;
+    background-color: #7e00af;
+    width: 2px;
+    height: 1em;
+    animation: blink-cursor 0.8s steps(2) infinite;
+    vertical-align: bottom;
 }
 
 @keyframes blink-cursor {
     0%, 100% {
-        border-right-color: transparent; /* Hidden cursor */
+        background-color: transparent; /* Hidden cursor */
     }
     50% {
-        border-right-color: #7e00af; /* Visible cursor */
+        background-color: #7e00af; /* Visible cursor */
     }
 }

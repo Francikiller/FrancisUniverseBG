@@ -54,7 +54,9 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            line-height: 1.4; /* Add some line height for spacing between lines */
+            line-height: 1.4; /* Adjust line height for better spacing */
+            white-space: nowrap; /* Ensure text doesn't wrap */
+            overflow: hidden; /* Hide the overflow */
         }
 
         .cursor {
@@ -82,8 +84,7 @@
 <body>
     <div class="circle-container"></div>
     <div class="text-box">
-        <div>Welcome<span class="cursor"></span></div>
-        <div>To Francis Universe.</div> <!-- New text line -->
+        <span class="typewriter"></span><span class="cursor"></span>
     </div>
     <script src="script.js"></script>
 </body>
