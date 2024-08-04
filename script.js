@@ -4,23 +4,36 @@ document.addEventListener("DOMContentLoaded", function() {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
+    // Create a single <style> element for keyframes
     const styleSheet = document.createElement('style');
     document.head.appendChild(styleSheet);
 
-    const createKeyframes = (index, startX, startY, endX, endY) => `
-        @keyframes move-${index} {
+    // Function to generate unique keyframe names
+    const generateUniqueId = () => `move-${Math.random().toString(36).substr(2, 9)}`;
+
+    const createKeyframes = (id, startX, startY, endX, endY) => `
+        @keyframes ${id} {
             0% { transform: translate(${startX}, ${startY}); }
             100% { transform: translate(${endX}, ${endY}); }
         }
     `;
 
-    const updateKeyframes = (index, startX, startY, endX, endY) => {
-        const keyframes = createKeyframes(index, startX, startY, endX, endY);
-        styleSheet.sheet.insertRule(keyframes, styleSheet.sheet.cssRules.length);
+    // Store keyframe rules to avoid duplication
+    const keyframeRules = new Map();
 
-        // Clean up old keyframes if needed
-        if (styleSheet.sheet.cssRules.length > 20) { // Adjust the number as needed
-            styleSheet.sheet.deleteRule(0);
+    const updateKeyframes = (id, startX, startY, endX, endY) => {
+        if (!keyframeRules.has(id)) {
+            const keyframes = createKeyframes(id, startX, startY, endX, endY);
+            styleSheet.sheet.insertRule(keyframes, styleSheet.sheet.cssRules.length);
+            keyframeRules.set(id, true);
+        } else {
+            // Update existing keyframes if necessary
+            const ruleIndex = Array.from(styleSheet.sheet.cssRules).findIndex(rule => rule.name === id);
+            if (ruleIndex >= 0) {
+                styleSheet.sheet.deleteRule(ruleIndex);
+                const keyframes = createKeyframes(id, startX, startY, endX, endY);
+                styleSheet.sheet.insertRule(keyframes, styleSheet.sheet.cssRules.length);
+            }
         }
     };
 
@@ -36,17 +49,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const blinkDuration = Math.random() * 2 + 4 + 's';
         const movementDuration = Math.random() * 10 + 5 + 's';
 
+        // Generate a unique id for the keyframes
+        const id = generateUniqueId();
+        updateKeyframes(id, startX, startY, endX, endY);
+
         circle.style.width = size;
         circle.style.height = size;
         circle.style.transform = `translate(${startX}, ${startY})`;
-        circle.style.animation = `blink ${blinkDuration} infinite, move-${Date.now()} ${movementDuration} linear infinite`;
+        circle.style.animation = `blink ${blinkDuration} infinite, ${id} ${movementDuration} linear infinite`;
 
-        updateKeyframes(Date.now(), startX, startY, endX, endY);
-
-        // Add the circle to the container
         container.appendChild(circle);
 
-        return circle;
+        return { circle, id, endX, endY, movementDuration };
     };
 
     const circles = [];
@@ -58,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        circles.forEach(circle => {
+        circles.forEach(({ circle, id, endX, endY, movementDuration }, index) => {
             const rect = circle.getBoundingClientRect();
             if (
                 rect.left > viewportWidth || 
@@ -66,12 +80,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 rect.top > viewportHeight || 
                 rect.bottom < 0
             ) {
-                // Remove circle
+                // Remove the circle
                 container.removeChild(circle);
+                keyframeRules.delete(id);
 
                 // Create and add a new circle
-                const newCircle = createCircle();
-                circles[circles.indexOf(circle)] = newCircle;
+                const newCircleData = createCircle();
+                circles[index] = newCircleData;
             }
         });
     };
