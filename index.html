@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>francisuniversemain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -55,6 +58,7 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Silkscreen', cursive; /* Use the Google Font */
         }
     </style>
 </head>
@@ -66,7 +70,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.querySelector('.circle-container');
-            const numCircles = 450; // Increased number of circles to 4,000
+            const numCircles = 450; // Increased number of circles to 450
         
             for (let i = 0; i < numCircles; i++) {
                 const circle = document.createElement('div');
