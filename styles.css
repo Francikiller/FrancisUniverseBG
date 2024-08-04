@@ -18,7 +18,7 @@ body, html {
 .circle {
     position: absolute;
     border-radius: 50%;
-    background: rgba(57, 0, 96, 0.8);
+    background: rgba(91, 0, 151, 0.8);
     animation: blink 6s infinite; /* Slower blink speed */
 }
 
