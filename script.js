@@ -108,11 +108,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentTextIndex = 0;
     let isDeleting = false;
     let textIndex = 0;
+    let cursorVisible = true;
+
+    const typeSpeed = 100; // Speed of typing
+    const deleteSpeed = 50; // Speed of deleting
+    const pauseBeforeNextText = 2000; // Pause before starting next text
 
     const typewriter = () => {
         const currentText = texts[currentTextIndex];
-        const typeSpeed = 100; // Speed of typing
-        const deleteSpeed = 50; // Speed of deleting
 
         if (!isDeleting) {
             // Typing
@@ -121,9 +124,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 textIndex++;
                 setTimeout(typewriter, typeSpeed);
             } else {
-                // Start deleting after typing is complete
-                isDeleting = true;
-                setTimeout(typewriter, 1000); // Pause before deleting
+                // Pause before deleting
+                setTimeout(() => {
+                    isDeleting = true;
+                    setTimeout(typewriter, pauseBeforeNextText); // Pause before deleting
+                }, pauseBeforeNextText);
             }
         } else {
             // Deleting
@@ -138,6 +143,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 setTimeout(typewriter, 500); // Pause before typing next text
             }
         }
+
+        // Toggle cursor visibility
+        cursorVisible = !cursorVisible;
+        document.querySelector('.cursor').style.visibility = cursorVisible ? 'visible' : 'hidden';
     };
 
     typewriter();
