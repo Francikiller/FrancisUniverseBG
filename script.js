@@ -5,37 +5,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const styleSheet = document.createElement('style');
     document.head.appendChild(styleSheet);
 
-    // Keep track of keyframes used
-    let usedKeyframes = new Set();
+    let keyframeIndex = 0;
 
-    const createKeyframes = (index) => `
+    const createKeyframes = (index, startX, startY, endX, endY) => `
         @keyframes move-${index} {
-            0% { transform: translate(var(--start-x), var(--start-y)); }
-            100% { transform: translate(var(--end-x), var(--end-y)); }
+            0% { transform: translate(${startX}, ${startY}); }
+            100% { transform: translate(${endX}, ${endY}); }
         }
     `;
 
     const updateKeyframes = (index, startX, startY, endX, endY) => {
-        // Add new keyframes
-        if (!usedKeyframes.has(index)) {
-            usedKeyframes.add(index);
-            styleSheet.innerHTML += createKeyframes(index);
-        }
-        
-        // Update existing keyframes
-        styleSheet.innerHTML = styleSheet.innerHTML.replace(
-            new RegExp(`@keyframes move-${index} {[^}]*}`, 'g'),
-            createKeyframes(index)
-        );
-        
-        // Remove old keyframes if limit exceeded
-        if (usedKeyframes.size > maxKeyframes) {
-            let keyframesToRemove = Array.from(usedKeyframes).slice(0, usedKeyframes.size - maxKeyframes);
-            keyframesToRemove.forEach(keyframeIndex => {
-                const regex = new RegExp(`@keyframes move-${keyframeIndex} {[^}]*}`, 'g');
-                styleSheet.innerHTML = styleSheet.innerHTML.replace(regex, '');
-                usedKeyframes.delete(keyframeIndex);
-            });
+        const keyframes = createKeyframes(index, startX, startY, endX, endY);
+        styleSheet.sheet.insertRule(keyframes, styleSheet.sheet.cssRules.length);
+
+        // Remove old keyframes if the limit is exceeded
+        if (styleSheet.sheet.cssRules.length > maxKeyframes) {
+            styleSheet.sheet.deleteRule(0); // Remove the oldest rule
         }
     };
 
@@ -65,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const newEndX = Math.random() * 100 + 'vw';
             const newEndY = Math.random() * 100 + 'vh';
 
-            // Update custom properties and keyframes
             circle.style.setProperty('--end-x', newEndX);
             circle.style.setProperty('--end-y', newEndY);
 
