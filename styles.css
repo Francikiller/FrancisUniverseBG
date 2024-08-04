@@ -30,3 +30,21 @@ body, html {
         opacity: 0;
     }
 }
+.text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0);
+    color: #7e00af;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.4; /* Adjust line height for better spacing */
+}
+
+.text-box div {
+    margin: 0; /* Remove default margin */
+}
