@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>francisuniversemain</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="path/to/your/favicon.png">
     <style>
         body, html {
             margin: 0;
@@ -14,7 +13,7 @@
             overflow: hidden;
             height: 100%;
             background: #000;
-            font-family: Arial, sans-serif; /* Default font for the text box */
+            font-family: 'Silkscreen', Arial, sans-serif; /* Updated font */
         }
         
         .circle-container {
@@ -58,26 +57,29 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            font-family: 'Silkscreen', cursive; /* Use the Google Font */
         }
 
-        .text-box .cursor {
+        /* Blinking cursor */
+        .cursor {
             display: inline-block;
-            width: 2px;
-            height: 1em;
             background-color: #7e00af;
-            animation: blinkCursor 1s infinite;
+            width: 2px;
+            animation: blink-cursor 0.8s steps(2) infinite;
+            vertical-align: bottom;
         }
 
-        @keyframes blinkCursor {
-            0%, 50% {
+        @keyframes blink-cursor {
+            0%, 100% {
                 opacity: 1;
             }
-            51%, 100% {
+            50% {
                 opacity: 0;
             }
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="circle-container"></div>
