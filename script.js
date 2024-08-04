@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
     const numCircles = 450;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
 
     // Create a single <style> element for keyframes
     const styleSheet = document.createElement('style');
     document.head.appendChild(styleSheet);
 
-    // Function to generate unique keyframe names
+    // Generate unique keyframe names
     const generateUniqueId = () => `move-${Math.random().toString(36).substr(2, 9)}`;
 
+    // Function to create keyframes
     const createKeyframes = (id, startX, startY, endX, endY) => `
         @keyframes ${id} {
             0% { transform: translate(${startX}, ${startY}); }
@@ -21,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Store keyframe rules to avoid duplication
     const keyframeRules = new Map();
 
+    // Function to update keyframes
     const updateKeyframes = (id, startX, startY, endX, endY) => {
         if (!keyframeRules.has(id)) {
             const keyframes = createKeyframes(id, startX, startY, endX, endY);
@@ -37,19 +37,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
+    // Function to create a circle
     const createCircle = () => {
         const circle = document.createElement('div');
         circle.classList.add('circle');
 
-        const size = Math.random() * 3 + 1 + 'px';
-        const startX = Math.random() * 100 + 'vw';
-        const startY = Math.random() * 100 + 'vh';
-        let endX = Math.random() * 100 + 'vw';
-        let endY = Math.random() * 100 + 'vh';
-        const blinkDuration = Math.random() * 2 + 4 + 's';
-        const movementDuration = Math.random() * 10 + 5 + 's';
+        const size = `${Math.random() * 3 + 1}px`;
+        const startX = `${Math.random() * 100}vw`;
+        const startY = `${Math.random() * 100}vh`;
+        const endX = `${Math.random() * 100}vw`;
+        const endY = `${Math.random() * 100}vh`;
+        const blinkDuration = `${Math.random() * 2 + 4}s`;
+        const movementDuration = `${Math.random() * 10 + 5}s`;
 
-        // Generate a unique id for the keyframes
         const id = generateUniqueId();
         updateKeyframes(id, startX, startY, endX, endY);
 
@@ -63,11 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
         return { circle, id, endX, endY, movementDuration };
     };
 
+    // Array to store circle data
     const circles = [];
     for (let i = 0; i < numCircles; i++) {
         circles.push(createCircle());
     }
 
+    // Function to check and replace circles
     const checkAndReplaceCircles = () => {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
