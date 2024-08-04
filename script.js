@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const container = document.querySelector('.circle-container');
     const numCircles = 450;
-    const maxKeyframes = 10; // Maximum number of keyframe animations to keep
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
     const styleSheet = document.createElement('style');
     document.head.appendChild(styleSheet);
-
-    let keyframeIndex = 0;
 
     const createKeyframes = (index, startX, startY, endX, endY) => `
         @keyframes move-${index} {
@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const keyframes = createKeyframes(index, startX, startY, endX, endY);
         styleSheet.sheet.insertRule(keyframes, styleSheet.sheet.cssRules.length);
 
-        // Remove old keyframes if the limit is exceeded
-        if (styleSheet.sheet.cssRules.length > maxKeyframes) {
-            styleSheet.sheet.deleteRule(0); // Remove the oldest rule
+        // Clean up old keyframes if needed
+        if (styleSheet.sheet.cssRules.length > 20) { // Adjust the number as needed
+            styleSheet.sheet.deleteRule(0);
         }
     };
 
-    for (let i = 0; i < numCircles; i++) {
+    const createCircle = () => {
         const circle = document.createElement('div');
         circle.classList.add('circle');
 
@@ -38,24 +38,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
         circle.style.width = size;
         circle.style.height = size;
-        circle.style.setProperty('--start-x', startX);
-        circle.style.setProperty('--start-y', startY);
-        circle.style.setProperty('--end-x', endX);
-        circle.style.setProperty('--end-y', endY);
-        circle.style.animation = `blink ${blinkDuration} infinite, move-${i} ${movementDuration} linear infinite`;
+        circle.style.transform = `translate(${startX}, ${startY})`;
+        circle.style.animation = `blink ${blinkDuration} infinite, move-${Date.now()} ${movementDuration} linear infinite`;
 
-        updateKeyframes(i, startX, startY, endX, endY);
+        updateKeyframes(Date.now(), startX, startY, endX, endY);
 
-        setInterval(() => {
-            const newEndX = Math.random() * 100 + 'vw';
-            const newEndY = Math.random() * 100 + 'vh';
-
-            circle.style.setProperty('--end-x', newEndX);
-            circle.style.setProperty('--end-y', newEndY);
-
-            updateKeyframes(i, startX, startY, newEndX, newEndY);
-        }, (Math.random() * 10 + 5) * 1000);
-
+        // Add the circle to the container
         container.appendChild(circle);
+
+        return circle;
+    };
+
+    const circles = [];
+    for (let i = 0; i < numCircles; i++) {
+        circles.push(createCircle());
     }
+
+    const checkAndReplaceCircles = () => {
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        circles.forEach(circle => {
+            const rect = circle.getBoundingClientRect();
+            if (
+                rect.left > viewportWidth || 
+                rect.right < 0 || 
+                rect.top > viewportHeight || 
+                rect.bottom < 0
+            ) {
+                // Remove circle
+                container.removeChild(circle);
+
+                // Create and add a new circle
+                const newCircle = createCircle();
+                circles[circles.indexOf(circle)] = newCircle;
+            }
+        });
+    };
+
+    // Check every 100ms
+    setInterval(checkAndReplaceCircles, 100);
+
+    // Update viewport dimensions on resize
+    window.addEventListener('resize', () => {
+        viewportWidth = window.innerWidth;
+        viewportHeight = window.innerHeight;
+    });
 });
