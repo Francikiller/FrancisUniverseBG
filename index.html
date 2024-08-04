@@ -11,6 +11,7 @@
             overflow: hidden;
             height: 100%;
             background: #000;
+            font-family: Arial, sans-serif; /* Default font for the text box */
         }
         
         .circle-container {
@@ -41,10 +42,27 @@
                 opacity: 1;
             }
         }
+
+        .text-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
     <div class="circle-container"></div>
+    <div class="text-box">
+        Your Text Here
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.querySelector('.circle-container');
