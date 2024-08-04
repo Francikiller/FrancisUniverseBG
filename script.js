@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < numCircles; i++) {
         const circle = document.createElement('div');
         circle.classList.add('circle');
-        
+
         const size = Math.random() * 3 + 1 + 'px';
         const startX = Math.random() * 100 + 'vw';
         const startY = Math.random() * 100 + 'vh';
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         circle.style.width = size;
         circle.style.height = size;
         circle.style.transform = `translate(${startX}, ${startY})`;
-        circle.style.animationDuration = `blink ${blinkDuration} infinite`;
+        circle.style.animation = `blink ${blinkDuration} infinite`;
 
         const updateKeyframes = (index, startX, startY, endX, endY) => {
             const keyframes = `
