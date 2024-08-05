@@ -10,9 +10,13 @@
     text-align: center;
     font-size: 18px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    line-height: 1.4; /* Adjust line height for better spacing */
-    white-space: nowrap; /* Ensure text doesn't wrap */
-    overflow: hidden; /* Hide the overflow */
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.typewriter {
+    display: inline-block;
 }
 
 .cursor {
@@ -26,9 +30,9 @@
 
 @keyframes blink-cursor {
     0%, 100% {
-        background-color: transparent; /* Hidden cursor */
+        opacity: 1;
     }
     50% {
-        background-color: #7e00af; /* Visible cursor */
+        opacity: 0;
     }
 }

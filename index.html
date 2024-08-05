@@ -28,7 +28,13 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            line-height: 1.4; /* Add some line height for spacing between lines */
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .typewriter {
+            display: inline-block;
         }
 
         .cursor {
@@ -75,8 +81,7 @@
 <body>
     <div id="particles-js"></div> <!-- Particle container -->
     <div class="text-box">
-        <div class="typewriter"></div>
-        <div class="cursor"></div>
+        <div class="typewriter"></div><div class="cursor"></div>
     </div>
     <script src="script.js"></script>
 </body>
