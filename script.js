@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             },
             "line_linked": {
-                "enable": true,
+                "enable": false,
                 "distance": 150,
                 "color": "#7e00af",
                 "opacity": 0.4,
