@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             "line_linked": {
                 "enable": false,
-                "distance": 150,
+                "distance": 0,
                 "color": "#7e00af",
-                "opacity": 0.4,
-                "width": 1
+                "opacity": 0,
+                "width": 0
             },
             "move": {
                 "enable": true,
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             "detect_on": "canvas",
             "events": {
                 "onhover": {
-                    "enable": true,
+                    "enable": false,
                     "mode": "repulse"
                 },
                 "onclick": {
@@ -98,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     "speed": 3
                 },
                 "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
+                    "distance": 0,
+                    "duration": 0
                 },
                 "push": {
                     "particles_nb": 4
