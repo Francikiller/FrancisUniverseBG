@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Check if particles.js is loaded
+    if (typeof particlesJS === 'undefined') {
+        console.error('particlesJS is not defined. Ensure particles.js is loaded correctly.');
+        return;
+    }
+
     // Initialize particles.js with the config
     particlesJS('particles-js', {
         "particles": {
