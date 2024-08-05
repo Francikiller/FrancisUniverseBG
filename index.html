@@ -16,32 +16,6 @@
             font-family: 'Silkscreen', Arial, sans-serif;
         }
 
-        .circle-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(57, 0, 96, 0.8);
-            animation: blink 6s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            57% {
-                opacity: 0;
-            }
-        }
-
         .text-box {
             position: absolute;
             top: 50%;
@@ -54,9 +28,7 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            line-height: 1.4; /* Adjust line height for better spacing */
-            white-space: nowrap; /* Ensure text doesn't wrap */
-            overflow: hidden; /* Hide the overflow */
+            line-height: 1.4; /* Add some line height for spacing between lines */
         }
 
         .cursor {
@@ -70,11 +42,29 @@
 
         @keyframes blink-cursor {
             0%, 100% {
-                background-color: transparent; /* Hidden cursor */
+                opacity: 1;
             }
             50% {
-                background-color: #7e00af; /* Visible cursor */
+                opacity: 0;
             }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #D62929;
         }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,10 +72,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="circle-container"></div>
+    <div id="particles-js"></div> <!-- Particle container -->
     <div class="text-box">
-        <span class="typewriter"></span><span class="cursor"></span>
+        <div class="typewriter"></div>
+        <div class="cursor"></div>
     </div>
+    <script src="particles.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
