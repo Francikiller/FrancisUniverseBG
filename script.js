@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
         particlesJS('particles-js', getParticleConfig());
     });
 
-    // Typewriter effect remains the same
+    // Typewriter effect
     const textBox = document.querySelector('.typewriter');
     const texts = ["Welcome", "To Francis Universe."];
     let currentTextIndex = 0;
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!isDeleting) {
             if (textIndex < currentText.length) {
-                textBox.innerHTML += currentText.charAt(textIndex);
+                textBox.innerHTML = currentText.substring(0, textIndex + 1); // Fix for cursor
                 textIndex++;
                 setTimeout(typewriter, typeSpeed);
             } else {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         } else {
             if (textIndex > 0) {
-                textBox.innerHTML = currentText.substring(0, textIndex - 1);
+                textBox.innerHTML = currentText.substring(0, textIndex - 1); // Fix for cursor
                 textIndex--;
                 setTimeout(typewriter, deleteSpeed);
             } else {

@@ -1,24 +1,23 @@
-/* Main container styles */
-body, html {
+/* Ensure the body and html take up the full height of the viewport */
+html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
     height: 100%;
-    background: #000;
-    font-family: 'Silkscreen', Arial, sans-serif;
+    overflow: hidden;
 }
 
-/* Particles.js container */
+/* Make the particles.js container fill the screen */
 #particles-js {
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Ensure the particles are behind the text */
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place behind the content */
+    background-color: #000; /* Fallback background color */
 }
 
-/* Text box styles */
+/* Style the text box */
 .text-box {
     position: absolute;
     top: 50%;
@@ -36,12 +35,11 @@ body, html {
     overflow: hidden;
 }
 
-/* Typewriter text styling */
+/* Typewriter effect */
 .typewriter {
     display: inline-block;
 }
 
-/* Cursor styling */
 .cursor {
     display: inline-block;
     background-color: #7e00af;
@@ -51,7 +49,7 @@ body, html {
     vertical-align: bottom;
 }
 
-/* Cursor blinking animation */
+/* Blinking cursor animation */
 @keyframes blink-cursor {
     0%, 100% {
         opacity: 1;
@@ -61,25 +59,7 @@ body, html {
     }
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #D62929;
-}
-
-/* Responsive adjustments */
+/* Responsive text box adjustments */
 @media (max-width: 576px) {
     .text-box {
         font-size: 14px;
