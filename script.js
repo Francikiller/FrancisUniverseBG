@@ -150,35 +150,35 @@ document.addEventListener("DOMContentLoaded", function() {
     const deleteSpeed = 50;
     const pauseBeforeNextText = 2000;
 
-    const typewriter = () => {
+    function typewriter() {
         const currentText = texts[currentTextIndex];
 
         if (!isDeleting) {
             if (textIndex < currentText.length) {
-                textBox.innerHTML = currentText.substring(0, textIndex + 1); // Fix for cursor
+                textBox.innerHTML = currentText.substring(0, textIndex + 1);
                 textIndex++;
-                setTimeout(typewriter, typeSpeed);
+                setTimeout(typewriter, typeSpeed); // Pass function reference
             } else {
                 setTimeout(() => {
                     isDeleting = true;
-                    setTimeout(typewriter, pauseBeforeNextText);
+                    typewriter(); // Call typewriter directly
                 }, pauseBeforeNextText);
             }
         } else {
             if (textIndex > 0) {
-                textBox.innerHTML = currentText.substring(0, textIndex - 1); // Fix for cursor
+                textBox.innerHTML = currentText.substring(0, textIndex - 1);
                 textIndex--;
-                setTimeout(typewriter, deleteSpeed);
+                setTimeout(typewriter, deleteSpeed); // Pass function reference
             } else {
                 isDeleting = false;
                 currentTextIndex = (currentTextIndex + 1) % texts.length;
-                setTimeout(typewriter, 500);
+                setTimeout(typewriter, 500); // Pass function reference
             }
         }
 
         cursorVisible = !cursorVisible;
         document.querySelector('.cursor').style.visibility = cursorVisible ? 'visible' : 'hidden';
-    };
+    }
 
-    typewriter();
+    typewriter(); // Start the typewriter effect
 });
