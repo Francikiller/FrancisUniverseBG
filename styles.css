@@ -8,6 +8,16 @@ body, html {
     font-family: 'Silkscreen', Arial, sans-serif;
 }
 
+/* Particles.js container */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the particles are behind the text */
+}
+
 /* Text box styles */
 .text-box {
     position: absolute;
