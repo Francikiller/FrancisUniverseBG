@@ -1,3 +1,14 @@
+/* Main container styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    background: #000;
+    font-family: 'Silkscreen', Arial, sans-serif;
+}
+
+/* Text box styles */
 .text-box {
     position: absolute;
     top: 50%;
@@ -15,10 +26,12 @@
     overflow: hidden;
 }
 
+/* Typewriter text styling */
 .typewriter {
     display: inline-block;
 }
 
+/* Cursor styling */
 .cursor {
     display: inline-block;
     background-color: #7e00af;
@@ -28,11 +41,45 @@
     vertical-align: bottom;
 }
 
+/* Cursor blinking animation */
 @keyframes blink-cursor {
     0%, 100% {
         opacity: 1;
     }
     50% {
         opacity: 0;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #D62929;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .text-box {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-box {
+        font-size: 16px;
+        padding: 15px;
     }
 }
