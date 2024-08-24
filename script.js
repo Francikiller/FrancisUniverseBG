@@ -138,47 +138,38 @@ document.addEventListener("DOMContentLoaded", function() {
         particlesJS('particles-js', getParticleConfig());
     });
 
-    // Typewriter effect
-    const textBox = document.querySelector('.typewriter');
-    const texts = ["Welcome", "To Francis Universe."];
-    let currentTextIndex = 0;
-    let isDeleting = false;
-    let textIndex = 0;
-    let cursorVisible = true;
-
+    // Typing effect
+    const texts = ['Discover. Create. Evolve.', 'Where ideas become reality.', 'Your journey starts here.'];
+    let index = 0;
+    let charIndex = 0;
     const typeSpeed = 100;
-    const deleteSpeed = 50;
-    const pauseBeforeNextText = 2000;
+    const eraseSpeed = 50;
+    const newTextDelay = 2000;
+    const cursor = document.querySelector('.cursor');
+    const typewriterElement = document.querySelector('.typewriter');
 
-    function typewriter() {
-        const currentText = texts[currentTextIndex];
-
-        if (!isDeleting) {
-            if (textIndex < currentText.length) {
-                textBox.innerHTML = currentText.substring(0, textIndex + 1);
-                textIndex++;
-                setTimeout(typewriter, typeSpeed); // Pass function reference
-            } else {
-                setTimeout(() => {
-                    isDeleting = true;
-                    typewriter(); // Call typewriter directly
-                }, pauseBeforeNextText);
-            }
+    function type() {
+        if (charIndex < texts[index].length) {
+            typewriterElement.textContent += texts[index].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typeSpeed);
         } else {
-            if (textIndex > 0) {
-                textBox.innerHTML = currentText.substring(0, textIndex - 1);
-                textIndex--;
-                setTimeout(typewriter, deleteSpeed); // Pass function reference
-            } else {
-                isDeleting = false;
-                currentTextIndex = (currentTextIndex + 1) % texts.length;
-                setTimeout(typewriter, 500); // Pass function reference
-            }
+            setTimeout(erase, newTextDelay);
         }
-
-        cursorVisible = !cursorVisible;
-        document.querySelector('.cursor').style.visibility = cursorVisible ? 'visible' : 'hidden';
     }
 
-    typewriter(); // Start the typewriter effect
+    function erase() {
+        if (charIndex > 0) {
+            typewriterElement.textContent = texts[index].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(erase, eraseSpeed);
+        } else {
+            index++;
+            if (index >= texts.length) index = 0;
+            setTimeout(type, typeSpeed + 1100);
+        }
+    }
+
+    // Start typing on load
+    type();
 });
