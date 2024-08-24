@@ -65,11 +65,11 @@ var pJS = function(tag_id, params){
         }
       },
       line_linked: {
-        enable: true,
-        distance: 100,
+        enable: false,
+        distance: 0,
         color: '#fff',
-        opacity: 1,
-        width: 1
+        opacity: 0,
+        width: 0
       },
       move: {
         enable: true,
@@ -91,7 +91,7 @@ var pJS = function(tag_id, params){
       detect_on: 'canvas',
       events: {
         onhover: {
-          enable: true,
+          enable: false,
           mode: 'grab'
         },
         onclick: {
@@ -102,9 +102,9 @@ var pJS = function(tag_id, params){
       },
       modes: {
         grab:{
-          distance: 100,
+          distance: 0,
           line_linked:{
-            opacity: 1
+            opacity: 0
           }
         },
         bubble:{
