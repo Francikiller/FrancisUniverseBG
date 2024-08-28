@@ -16,7 +16,7 @@
         }
 
         /* Particles.js container */
-        #particles-js {
+        #particles\\.js { /* Escape the dot in the ID */
             position: fixed;
             top: 0;
             left: 0;
@@ -105,7 +105,7 @@
 </head>
 <body>
     <!-- Particles.js container -->
-    <div id="particles-js"></div>
+    <div id="particles.js"></div>
 
     <!-- Scrollable Content -->
     <div class="content">
@@ -134,7 +134,7 @@
             }
 
             // Initialize particles.js
-            particlesJS("particles-js", {
+            particlesJS("particles.js", {
                 "particles": {
                     "number": {
                         "value": 160,
