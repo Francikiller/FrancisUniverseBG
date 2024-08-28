@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francis Universe</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         body, html {
@@ -18,18 +17,18 @@
 
         /* Particles.js container */
         #particles-js {
-            position: fixed; /* Fix the particles background */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Keep it behind other content */
+            z-index: -1; /* Behind the text */
         }
 
-        /* Container for scrollable content */
+        /* Scrollable Content */
         .content {
             position: relative;
-            z-index: 1; /* Place content above particles */
+            z-index: 1;
             padding: 50px;
             color: #7e00af;
             text-align: center;
@@ -71,18 +70,18 @@
         ::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             border-radius: 10px;
-            background-color: #F5F5F5;
+            background-color: #000000;
         }
 
         ::-webkit-scrollbar {
             width: 12px;
-            background-color: #F5F5F5;
+            background-color: #000000;
         }
 
         ::-webkit-scrollbar-thumb {
             border-radius: 10px;
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #D62929;
+            background-color: #32006b;
         }
 
         /* Responsive text box adjustments */
@@ -125,8 +124,6 @@
 
     <!-- Load particles.js over HTTPS -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Load stats.js over HTTPS -->
-    <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
     <!-- Custom JS -->
     <script>
@@ -212,26 +209,6 @@
                 },
                 "retina_detect": true
             });
-
-            // Initialize stats.js for performance monitoring
-            var stats = new Stats();
-            stats.setMode(0);
-            stats.domElement.style.position = 'absolute';
-            stats.domElement.style.left = '0px';
-            stats.domElement.style.top = '0px';
-            document.body.appendChild(stats.domElement);
-
-            // Update particle count and stats
-            var count_particles = document.querySelector('.js-count-particles');
-            var update = function() {
-                stats.begin();
-                stats.end();
-                if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-                    count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-                }
-                requestAnimationFrame(update);
-            };
-            requestAnimationFrame(update);
 
             // Typing effect
             const texts = ['Welcome', 'To Francis Universe'];
