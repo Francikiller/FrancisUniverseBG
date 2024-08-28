@@ -16,7 +16,7 @@
         }
 
         /* Particles.js container */
-        #particles\\.js { /* Escape the dot in the ID */
+        #particles-js {
             position: fixed;
             top: 0;
             left: 0;
@@ -105,7 +105,7 @@
 </head>
 <body>
     <!-- Particles.js container -->
-    <div id="particles.js"></div>
+    <div id="particles-js"></div>
 
     <!-- Scrollable Content -->
     <div class="content">
@@ -128,13 +128,15 @@
     <!-- Custom JS -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            if (typeof particlesJS === 'undefined') {
-                console.error('particlesJS is not defined. Ensure particles.js is loaded correctly.');
+            const particlesContainer = document.getElementById('particles-js');
+
+            if (!particlesContainer) {
+                console.error('particles-js container not found.');
                 return;
             }
 
             // Initialize particles.js
-            particlesJS("particles.js", {
+            particlesJS("particles-js", {
                 "particles": {
                     "number": {
                         "value": 160,
