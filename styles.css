@@ -10,7 +10,7 @@ body, html {
 
 /* Particles.js container */
 #particles-js {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -18,18 +18,19 @@ body, html {
     z-index: -1; /* Ensure the particles are behind the text */
 }
 
+/* Scrollable Content */
+.content {
+    position: relative;
+    z-index: 1;
+    color: #7e00af;
+    text-align: center;
+}
+
 /* Text box styles */
 .text-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0);
-    color: #7e00af;
     padding: 20px;
     border-radius: 8px;
-    text-align: center;
-    font-size: 18px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     line-height: 1.4;
     white-space: nowrap;
@@ -59,6 +60,11 @@ body, html {
     50% {
         opacity: 0;
     }
+}
+
+/* Additional content styling */
+.additional-content {
+    margin-top: 100vh;
 }
 
 /* Scrollbar styling */
