@@ -64,7 +64,9 @@ body, html {
 
 /* Additional content styling */
 .additional-content {
-    margin-top: 100vh;
+    color: #7e00af; /* Match the color of the typewriter text */
+    text-align: center;
+    margin-top: 200vh; /* Add space to require scrolling */
 }
 
 /* Scrollbar styling */
