@@ -15,7 +15,7 @@ body, html {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Ensure the particles are behind the text */
+    z-index: 1; /* Ensure the particles are behind the text */
 }
 
 /* Scrollable Content */
